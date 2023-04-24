@@ -4,7 +4,7 @@ import Modal from "@/components/Modal/Modal";
 import { useDispatch, useSelector } from 'react-redux'
 import {closeModal, openModal} from "../../store/modal";
 import {RootState} from "../../store";
-import {getMovies, setSort, setOrder, setSearchBy,  importMovies} from "../../store/movie";
+import {getMovies, importMovies, setOrder, setSearchBy,  setSort} from "../../store/movie";
 import {CircleLoader} from "react-spinners";
 import Button from "@/components/Button/Button";
 import ListBox from "@/components/ListBox/ListBox";
@@ -19,8 +19,6 @@ interface IOption {
 
 
 export default function Home() {
-  const [search, setSearch] = useState('');
-
   const dispatch = useDispatch();
   const { movies, isLoading, error, sort, order, searchBy, limit, offset, fileContent } = useSelector((state: RootState) => state.movies);
   const { isOpen, modalType } = useSelector((state: RootState) => state.modal)

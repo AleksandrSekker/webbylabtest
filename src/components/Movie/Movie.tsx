@@ -5,8 +5,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faTrash, faRightToBracket} from "@fortawesome/free-solid-svg-icons";
 import {IProjectItemProps} from "@/components/Movie/Types";
 import TextMovie from "./TextMovie";
-import {batch, useDispatch} from "react-redux";
-import {deleteMovie, getMovies} from "../../../store/movie";
+import { useDispatch} from "react-redux";
+import { deleteMovie, getMovies } from "../../../store/movie";
 const Movie = ({
   id,
   title,

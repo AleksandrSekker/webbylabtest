@@ -1,38 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Table of Contents
+- General Info
+- Tech info
+- Installation
+- Architecture
 
-## Getting Started
+## General Info
+Test task for WebbyLab, movie app
 
-First, run the development server:
+## Tech info
+- [React](https://reactjs.org)
+- [Next.js](https://nextjs.org)
+- [redux-toolkit](https://redux-toolkit.js.org)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS](https://tailwindcss.com)
+- [testing-library](https://testing-library.com)
+- [react-hook-form](https://react-hook-form.com)
+- [eslint](https://eslint.org)
+- [framer motion](https://www.framer.com/motion/)
+- [headlessUI](https://headlessui.dev)
+- [fontawesome](https://fontawesome.com)
+
+## <a name="installation"></a>Installation
+To have this app running on your local computer, please follow the below steps:
+
+Clone repository:
+```
+$ git clone https://github.com/AleksandrSekker/webbylabtest.git
+```
+or
+```
+$ git clone git@github.com:AleksandrSekker/webbylabtest.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install project dependencies:
+```
+$ npm install
+```
+add .env.local file with the following variables:
+```
+NEXT_PUBLIC_HOSTNAME=localhost
+```
+```
+NEXT_PUBLIC_PORT=8000
+```
+```
+NEXT_PUBLIC_API_URL=http://${NEXT_PUBLIC_HOSTNAME}:${NEXT_PUBLIC_PORT}/api/v1/
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Run Docker
+Run Docker Pull Command:
+```
+$ docker pull webbylabhub/movies
+```
+Run Docker:
+```
+$ docker run --name movies -p 8000:8000 webbylabhub/movies
+```
+or in one line:
+```
+$ docker pull webbylabhub/movies && docker run --name movies -p 8000:8000 -d webbylabhub/movies
+```
+Run the project:
+```
+$ npm run dev 
+```
+### Don't forget login or register, it's required for all manipulations with movies as token is required
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Architecture
+### React
+As create react-react-app was deleted from official documentation as recommended way to create new applications, i had 3 options: Next.js, Gatsby or Remix. As i already have experience with Next.js, i decided to use it.
+### Redux
+Redux was used for state management. I used redux-toolkit for creating store, reducers and actions. I used it because it's recommended way and because it's easy to use and it's not required to write a lot of code
+### TypeScript
+I decided to use TypeScript because it's offers benefits such as type safety, improved scalability, enhanced productivity, better code organization, and improved collaboration.
+### Tailwind CSS
+I decided to use Tailwind CSS offers benefits such as rapid development, consistent design, customization, responsive design, and accessibility.
+### Testing Library
+Use unit test for testing React applications provides benefits such as encouraging more maintainable and robust tests, a simple API, emphasis on behavior testing, async testing, accessibility testing, and integration with popular frameworks.
+### React Hook Form
+As i have few forms in my app, i decided to use React Hook Form because this form library provides benefits such as simplified form management, reduced boilerplate code, improved performance and scalability, and support for both controlled and uncontrolled components.
+### Eslint
+I added Eslint because it's important to have a linter in your project. I added only few rules but it's provide benefits such as enforcing code consistency, identifying and preventing bugs and errors, improving code readability, and enhancing collaboration among developers.
+### Framer Motion
+As i have few animations in my app, i decided to use Framer Motion because it's a production-ready animation library for React.
+### Headless UI
+As I have few components in my app, i decided to use Headless UI because it's a collection of completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.
+### Fontawesome
+As i have few icons in my app, i decided to use Fontawesome because it's a library of free and premium SVG icons for you to use on your website.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
