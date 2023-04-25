@@ -3,9 +3,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Input from "@/components/Input/Input";
 import {useCallback} from "react";
-import {login, register as registerAction} from "../../../store/movie";
-import { useDispatch } from "react-redux";
+import {getMovies, login, register as registerAction} from "../../../store/movie";
+import {batch, useDispatch} from "react-redux";
 import {IAuthFormProps, ILoginInputs, IRegisterInputs} from "@/components/AuthForm/types";
+import {closeModal} from "../../../store/modal";
 
 export const AuthForm = ({ type }: IAuthFormProps) => {
   const dispatch = useDispatch();
@@ -36,7 +37,12 @@ export const AuthForm = ({ type }: IAuthFormProps) => {
     dispatch(login(({
       email: watch("email"),
       password: watch("password"),
-    } as ILoginInputs)));
+    } as ILoginInputs))).then(() => {
+      batch(() => {
+        dispatch(closeModal());
+        dispatch(getMovies());
+      });
+    });
   }, [dispatch, watch]);
   const sendHandlerRegister = useCallback(async () => {
     dispatch(registerAction(({
@@ -44,7 +50,12 @@ export const AuthForm = ({ type }: IAuthFormProps) => {
       name: watch("name"),
       password: watch("password"),
       confirmPassword: watch("confirmPassword"),
-    } as IRegisterInputs)));
+    } as IRegisterInputs))).then(() => {
+      batch(() => {
+        dispatch(closeModal());
+        dispatch(getMovies());
+      });
+    });
   }, [dispatch, watch]);
   const submitHandler = () => type === "login" ? sendHandlerLogin() : sendHandlerRegister();
   return (
