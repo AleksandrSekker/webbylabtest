@@ -79,7 +79,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <>
       <h1 className="text-4xl font-bold dark:text-white text-blue-400 text-center">Movie App</h1>
       <h3 className={'text-2xl font-bold dark:text-white text-blue-300 my-2'} > For load movies you need login using default credential of create new account </h3>
       <div className={'flex gap-2'}>
@@ -91,13 +91,11 @@ export default function Home() {
 
         <Button color="blue" title="Create" onClick={() => dispatch(openModal('create'))} />
         <UploadButton onFileSelect={(content) => {
-          console.log('content', typeof content);
           dispatch(importMovies(content)).then(() => {
             dispatch(getMovies());
           });
         }} />
       </div>
-      {fileContent && <p>{fileContent}</p>}
       <h3 className={'text-2xl font-bold dark:text-white text-blue-300 my-2'} > Here you can customise parameters for getting movies</h3>
       <ListBox
         options={optionsSort}
@@ -136,6 +134,6 @@ export default function Home() {
           />
         )) : null}
       </div>
-    </div>
+    </>
   )
 }

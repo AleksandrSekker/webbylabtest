@@ -63,13 +63,13 @@ export const importMovies: any = createAsyncThunk(
   'movies/importMovies',
   async (fileContent: string) => {
     const formData = new FormData();
-    formData.append('file', new Blob([fileContent], { type: 'text/plain' }), 'file.txt');
+    formData.append('movies', new Blob([fileContent], { type: 'text/plain' }), 'file.txt');
 
     const response = await fetch(`${baseURL}movies/import`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
         'Authorization': window.localStorage.getItem('authToken') as string
       },
       body: formData
