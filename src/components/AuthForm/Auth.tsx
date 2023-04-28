@@ -13,27 +13,27 @@ export const AuthForm = ({ type }: IAuthFormProps) => {
   const { register, handleSubmit, formState, watch } = useForm( type === "login" ? {
     resolver: zodResolver(
       z.object({
-        email: z.string(),
-        password: z.string(),
+        email: z.string().email(),
+        password: z
+          .string()
+          .min(6)
       })
     ),
     mode: "onSubmit",
   } : {
     resolver: zodResolver(
       z.object({
-        email: z.string(),
-        name: z.string(),
-        password: z.string(),
-        confirmPassword: z.string(),
+        email: z.string().email(),
+        name: z.string().min(2),
+        password: z.string().min(6),
+        confirmPassword: z.string().min(6),
       })
     ),
     mode: "onSubmit",
   });
   const { errors } = formState;
 
-
   const sendHandlerLogin = useCallback(async () => {
-    console.log("sendHandlerLogin", watch("email"), watch("password"))
     dispatch(login(({
       email: watch("email"),
       password: watch("password"),

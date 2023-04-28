@@ -35,7 +35,7 @@ export const links = [
     icon: faLinkedin,
   },
   {
-    link: "github.com/AleksandrSekker",
+    link: "https://github.com/AleksandrSekker",
     id: 5,
     icon: faGithub,
   }];

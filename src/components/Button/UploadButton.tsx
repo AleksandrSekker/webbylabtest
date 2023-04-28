@@ -1,5 +1,9 @@
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import Button from "@/components/Button/Button";
+import ErrorMessage from "@/components/Message/Message";
+import {removeError, setError} from "../../../store/movie";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../store";
 
 interface UploadButtonProps {
     onFileSelect: (fileContent: string) => void;
@@ -7,6 +11,8 @@ interface UploadButtonProps {
 
 export const UploadButton: React.FC<UploadButtonProps> = ({ onFileSelect }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { error } = useSelector((state: RootState) => state.movies);
+  const dispatch = useDispatch();
 
   const handleFileSelect = () => {
     fileInputRef.current?.click();
@@ -16,7 +22,7 @@ export const UploadButton: React.FC<UploadButtonProps> = ({ onFileSelect }) => {
     const file = event.target.files?.[0];
 
     if (!file || !file.name.endsWith('.txt')) {
-      return;
+      return dispatch(setError('Please select a text file'));
     }
 
     const reader = new FileReader();
@@ -27,6 +33,9 @@ export const UploadButton: React.FC<UploadButtonProps> = ({ onFileSelect }) => {
 
     reader.readAsText(file);
   };
+  if(error) {
+    return (<ErrorMessage show={!!error.length} message={error} removeError={() => dispatch(removeError())} />)
+  }
 
   return (
     <>
