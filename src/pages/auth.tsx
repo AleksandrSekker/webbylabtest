@@ -13,7 +13,7 @@ const Auth = () => {
   const { isOpen, modalType } = useSelector((state: RootState) => state.modal)
   const dispatch = useDispatch();
   const router = useRouter();
-  const authToken = localStorage ? localStorage.getItem("authToken") : null;
+  const authToken = typeof window !== 'undefined' ? localStorage.getItem("authToken") : null;
 
   useEffect(() => {
     if (authToken) {
